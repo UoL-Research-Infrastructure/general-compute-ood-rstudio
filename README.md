@@ -26,3 +26,4 @@ Here are the basic software requirements:
 This repo is deployed by Ansible to /var/www/ood/apps/sys/ on the ondemand node.<br>
 The form and submit files can be overridden by files in /etc/ood/config/apps/...
 
+Container images are expected to be installed in /opt/container_images on the compute nodes.
