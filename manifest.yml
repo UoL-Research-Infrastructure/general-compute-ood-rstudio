@@ -1,0 +1,9 @@
+---
+name: RStudio
+icon: icon.png
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: "This app will launch an [RStudio Server](https://www.rstudio.com/products/rstudio/#rstudio-server)
+  container on a compute node.\r\n\r\n- To stop the job, click 'Cancel' on the running interactive
+  session card in OnDemand.\r\n- If you wish to preserve your console history, be sure to quit your session (red button top right) before stopping the job.\r\n\r\n"

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+
+# Find available port to run server on
+port=$(find_port)
+
+# Generate SHA1 encrypted password (requires OpenSSL installed)
+SALT="$(create_passwd 16)"
+password="$(create_passwd 16)"
+PASSWORD_SHA1="$(echo -n "${password}${SALT}" | openssl dgst -sha1 | awk '{print $NF}')"
+
+# Setup TMP Dir
+TMPDIR="$(mktemp -d -p "/tmp" -t "$USER-tmpdir-XXXXXX")"
+TMP_DIR="$TMPDIR"
+chmod 700 "$TMPDIR"
+export TMPDIR TMP_DIR
+
+# Setup XDG_RUNTIME_DIR
+XDG_RUNTIME_DIR="$(mktemp -d -p "/tmp" -t "$USER-xdgrun-XXXXXX")"
+chmod 700 "$XDG_RUNTIME_DIR"
+export XDG_RUNTIME_DIR
+
+# Generate CSRF token needed for RStudio auto login
+<%-
+  require 'securerandom'
+  csrf_token = SecureRandom.uuid
+-%>
+export csrf_token=<%= csrf_token %>
+
+# reset SLURM_EXPORT_ENV
+export SLURM_EXPORT_ENV=ALL
+
