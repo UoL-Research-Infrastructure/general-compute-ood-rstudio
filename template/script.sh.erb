@@ -64,6 +64,7 @@ chmod 600 "$TMPDIR/rstudio-server/secure-cookie-key"
 
 # Setup Bind Mounts
 BPath="/tmp"
+BPath+=",/uolstore"
 BPath+=",$TMPDIR/rstudio-server/var/lib:/var/lib/rstudio-server"
 BPath+=",$TMPDIR/rstudio-server/var/run:/var/run/rstudio-server"
 BPath+=",logging.conf:/etc/rstudio/logging.conf"
